@@ -16,7 +16,7 @@ export default function useFeedbackCall<
           severity: 'success',
           summary: response.title,
           detail: response.message,
-          life: 5000,
+          life: 60000,
         })
         return response satisfies APIMessage<T>
       })

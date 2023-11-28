@@ -1,3 +1,4 @@
+import { HttpStatusCode } from 'axios'
 import { getUserByEmail } from 'models/user'
 import { Nullable } from 'primevue/ts-helpers'
 import { User, UserModel } from 'types/User'
@@ -9,26 +10,30 @@ export default defineEventHandler(async (event) => {
 
   if (!email || !password) {
     return createError({
-      statusCode: 400,
+      statusCode: HttpStatusCode.BadRequest,
+      statusMessage: 'Login error',
       message: 'Email address and password are required',
     })
   }
 
-  const user: Nullable<Partial<UserModel>> = {...await getUserByEmail(email)}
+  const dbUser = await getUserByEmail(email);
 
-  if (!user) {
+  if (!dbUser) {
     return createError({ 
-      statusCode: 401,
+      statusCode: HttpStatusCode.Forbidden,
+      statusMessage: 'Login error',
       message: 'Bad credentials',
     })
   }
 
+  const user: Nullable<Partial<UserModel>> = {...dbUser}
   const verified = await verify(password, user?.password!)
   delete user?.password;
 
   if (!verified) {
     return createError({
-      statusCode: 401,
+      statusCode: HttpStatusCode.Forbidden,
+      statusMessage: 'Login error',
       message: 'Bad credentials',
     })
   }

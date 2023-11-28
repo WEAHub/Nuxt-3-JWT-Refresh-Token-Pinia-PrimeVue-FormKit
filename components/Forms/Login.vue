@@ -1,61 +1,58 @@
 <script setup lang="ts">
-  import { FormKitSchemaDefinition } from '@formkit/core';
-  import { User } from 'types/User';
+import { FormKitNode, FormKitSchemaDefinition } from '@formkit/core';
+import { FetchError } from 'ofetch';
+import { User } from 'types/User';
+import { setErrors } from '@formkit/core'
+import { NuxtError } from '#app';
 
-  const auth = useAuth();
+const auth = useAuth();
 
-  const testUser = {
-    email: 'test@test.com',
-    password: 'test'
-  }
+const testUser = {
+  email: 'test@test.com',
+  password: 'test'
+}
 
-  const schema: FormKitSchemaDefinition = [
-    {
-      $formkit: 'primeInputText',
-      name: 'email',
-      label: 'Email',
-      type: 'email',
-      help: 'Please enter your student email address.',
-      validation: 'required|email',
-      placeholder: 'test@test.com',
-    },
-    {
-      $formkit: 'primePassword',
-      name: 'password',
-      label: 'Password',
-      type: 'password',
-      help: 'Please enter your password',
-      validation: 'required',
-      toggleMask: true,
-      showIcon: true
-    },
-  ];
-  
-  async function submitHandler(credentials: User) {
-    const loginResult = await auth.login(credentials);
-/*     if(loginSuccess) {
-      toast.add({ 
-        severity: 'success',
-        summary: 'Valid credentials',
-        detail: 'Login success.',
-        life: 3000 
-      });
-    }
-    else {
-      toast.add({ 
-        severity: 'error',
-        summary: 'Invalid credentials',
-        detail: 'Email or password incorrect.',
-        life: 3000 
-      });
-    } */
-  }
+const schema: FormKitSchemaDefinition = [
+  {
+    $formkit: 'primeInputText',
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    help: 'Please enter your student email address.',
+    validation: 'required|email',
+    placeholder: 'test@test.com',
+  },
+  {
+    $formkit: 'primePassword',
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+    help: 'Please enter your password',
+    validation: 'required',
+    toggleMask: true,
+    showIcon: true
+  },
+];
+
+async function submitHandler(credentials: User, node: FormKitNode) {
+  node.clearErrors()
+  auth.login(credentials).catch(handleLoginError);
+}
+
+function handleLoginError(error: FetchError): void {
+  const errorDetails: NuxtError = error.response?._data
+
+  setErrors(
+    'loginForm',
+    [errorDetails.message!]
+  )
+}
 
 </script>
 
 <template>
   <FormKit
-    id="form"
+    id="loginForm"
     type="form"
     v-model="testUser"
     :actions="false"

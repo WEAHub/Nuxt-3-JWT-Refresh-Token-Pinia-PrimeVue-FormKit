@@ -1,26 +1,41 @@
+import { NuxtError } from 'nuxt/app'
 import type { FetchError } from 'ofetch'
+import { ToastMessageOptions } from 'primevue/toast'
 
 export default function useErrorToast() {
   const toast = useToast()
 
   function handleError(error: FetchError) {
-    if (!error.response) {
-      toast.add({
-        severity: 'error',
-        summary: 'unknown error',
-        detail: { text: 'Network error' },
-        life: 5000,
+
+    const toastTemplate = {
+      generic: {
+        summary: 'Unknown error',
+        detail: 'Network error',
+      },
+      default: (response: NuxtError) => ({
+        summary: response.statusMessage,
+        detail: response.message,
       })
-      return
     }
-    const { title, message } = error.response._data
-    toast.add({
-      severity: 'error',
-      summary: title,
-      detail: { text: message },
+
+    console.log(error.statusMessage)
+
+    const hasResponse = !!error.response;
+
+    const toastConfigTemplate = hasResponse
+    ? toastTemplate.default(error.response?._data!)
+    : toastTemplate.generic;
+
+    const toastConfig: ToastMessageOptions = {
       life: 5000,
-    })
-    throw error
+      severity: 'error',
+      ...toastConfigTemplate,
+    }
+    
+    toast.add(toastConfig);
+
+    if(!hasResponse) {
+    }
   }
 
   return handleError

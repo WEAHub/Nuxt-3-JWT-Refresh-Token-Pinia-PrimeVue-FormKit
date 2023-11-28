@@ -24,16 +24,21 @@ export const useAuth = defineStore('auth', (): UseAuthComposer => {
   async function login(credentials: User) {
     
     try {
-      const { tokens, user } = await $fetchAPI<AuthResponse>('/auth/login', { method: 'POST', body: credentials })
+      const { tokens, user } = await $fetchAPI<AuthResponse>(
+        '/auth/login', { 
+          method: 'POST', 
+          body: credentials 
+        }
+      )
+
       setTokens(tokens);
       setUser(user);
+
       navigateTo({
         path: '/admin/dashboard'
       })
+
     } catch (error) {
-      if (error instanceof FetchError) {
-        console.log({error})
-      }
       throw error
     }
   }
@@ -41,6 +46,7 @@ export const useAuth = defineStore('auth', (): UseAuthComposer => {
   async function logout() {
     setTokens(null)
     setUser(null)
+
     navigateTo({
       path: '/'
     })
