@@ -14,7 +14,7 @@ export default function useFeedbackCall<
       .then((response: APIMessage<T>) => {
         toast.add({
           severity: 'success',
-          summary: 'title',
+          summary: response.title,
           detail: response.message,
           life: 5000,
         })

@@ -1,15 +1,15 @@
 import { APIMessage } from "~/types/APIMessage"
-import { User } from "~/types/User"
+import { User, UserModel } from "~/types/User"
 
 export default function useUpdateDetails() {
-  const { user, isAuthenticated } = storeToRefs(useAuth())
+  const { isAuthenticated } = storeToRefs(useAuth())
 
   if (!isAuthenticated.value) {
     throw new Error('User is not authenticated')
   }
 
-  const call = useFeedbackCall((dto: Partial<User>) => {
-    return $fetchAPI<APIMessage<User>>(
+  const call = useFeedbackCall((dto: Partial<UserModel>) => {
+    return $fetchAPI<APIMessage<UserModel>>(
       `/user/update`, 
       { 
         method: 'PATCH',
@@ -18,8 +18,8 @@ export default function useUpdateDetails() {
     )
   }, true)
 
-  return (dto: Partial<User>) => new Promise<void | APIMessage<User>>((resolve, reject) => {
-    (call(dto) as Promise<void | APIMessage<User>>)
+  return (dto: Partial<UserModel>) => new Promise<void | APIMessage<UserModel>>((resolve, reject) => {
+    (call(dto) as Promise<void | APIMessage<UserModel>>)
       .then(resolve)
       .catch(reject)
   }) 

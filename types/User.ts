@@ -4,6 +4,7 @@ export interface User {
   email: string
   password?: string
   name: string
+  avatarURL: string
 }
 
 export interface UserModel extends User {
@@ -11,9 +12,7 @@ export interface UserModel extends User {
 }
 
 
-export interface JWToken extends Partial<JwtPayload> {
-  email: string
-  name: string
+export interface JWToken extends Partial<JwtPayload>, User {
   tokenType: string
 }
 
