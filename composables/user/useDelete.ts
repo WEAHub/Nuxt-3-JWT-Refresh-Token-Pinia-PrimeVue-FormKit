@@ -15,11 +15,12 @@ export default function useDeleteUser() {
       `/user/${dto.id}`, 
       { method: 'DELETE' }
     )
-  }, true)
+  })
 
   return (dto: Partial<UserModel>) => new Promise<void | APIMessage<UserModel>>((resolve, reject) => {
     (call(dto) as Promise<void | APIMessage<UserModel>>)
       .then((data) => {
+        if(!data) return
         users.deleteUser(dto.id!)
         resolve(data)
       })

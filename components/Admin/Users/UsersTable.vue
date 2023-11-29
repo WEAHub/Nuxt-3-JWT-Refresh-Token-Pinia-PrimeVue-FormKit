@@ -17,6 +17,7 @@ onMounted(() => users.getUsers())
         :rowsPerPageOptions="[5, 10, 20, 50]"
         :rows="5" 
       >
+
         <template #header>
           <div class="flex flex-wrap align-items-center justify-content-between gap-2">
             <span class="text-xl text-900 font-bold">Users</span>
@@ -47,8 +48,8 @@ onMounted(() => users.getUsers())
             />
           </template>
         </Column>
+
       </DataTable>
     </template>
   </Card>
-  <ConfirmPopup></ConfirmPopup>
 </template>

@@ -6,7 +6,6 @@ export default function useErrorToast() {
   const toast = useToast()
 
   function handleError(error: FetchError) {
-
     const toastTemplate = {
       generic: {
         summary: 'Unknown error',
@@ -17,8 +16,6 @@ export default function useErrorToast() {
         detail: response.message,
       })
     }
-
-    console.log(error.statusMessage)
 
     const hasResponse = !!error.response;
 
@@ -35,6 +32,7 @@ export default function useErrorToast() {
     toast.add(toastConfig);
 
     if(!hasResponse) {
+      throw error
     }
   }
 

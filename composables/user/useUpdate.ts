@@ -16,7 +16,7 @@ export default function useUpdateDetails() {
         body: dto 
       }
     )
-  }, true)
+  })
 
   return (dto: Partial<UserModel>) => new Promise<void | APIMessage<UserModel>>((resolve, reject) => {
     (call(dto) as Promise<void | APIMessage<UserModel>>)
