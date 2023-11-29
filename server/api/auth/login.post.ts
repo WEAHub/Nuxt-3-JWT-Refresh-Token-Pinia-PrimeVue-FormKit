@@ -1,8 +1,8 @@
 import { HttpStatusCode } from 'axios'
 import { getUserByEmail } from 'models/user'
-import { Nullable } from 'primevue/ts-helpers'
 import { User, UserModel } from 'types/User'
-import { generateTokens } from '~/server/utils/session'
+import { Nullable } from 'primevue/ts-helpers'
+import { generateTokens } from 'server/utils/session'
 
 export default defineEventHandler(async (event) => {
   const body: User = await readBody(event)
@@ -16,9 +16,9 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const dbUser = await getUserByEmail(email);
+  const user = await getUserByEmail(email);
 
-  if (!dbUser) {
+  if (!user) {
     return createError({ 
       statusCode: HttpStatusCode.Forbidden,
       statusMessage: 'Login error',
@@ -26,9 +26,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const user: Nullable<Partial<UserModel>> = {...dbUser}
   const verified = await verify(password, user?.password!)
-  delete user?.password;
 
   if (!verified) {
     return createError({
@@ -38,7 +36,12 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const tokens = generateTokens(user)
+  const tokenData: Partial<UserModel> = { 
+    id: user.id
+  }
+
+  const tokens = generateTokens(tokenData)
+
   return {
     user,
     tokens

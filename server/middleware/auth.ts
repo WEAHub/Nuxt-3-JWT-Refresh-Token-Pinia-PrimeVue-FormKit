@@ -1,6 +1,7 @@
-import { AuthResponse, JWToken, UserModel } from "~/types/User";
+
 import { H3Event } from "h3";
 import { Nullable } from "primevue/ts-helpers"
+import { AuthResponse, JWToken, UserModel } from "types/User";
 
 function getAuthUser(event: H3Event): Nullable<UserModel> {
   const cookies: any = parseCookies(event);

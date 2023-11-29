@@ -7,6 +7,7 @@ export default async (event: H3Event<EventHandlerRequest>) => {
 
   const cookies: Nullable<JWTokens> = getTokens(event);
   
+
   if(!cookies) {
     throw createError({
       statusCode: 401
@@ -22,7 +23,8 @@ export default async (event: H3Event<EventHandlerRequest>) => {
 
   if(!tokenVerified) {
     throw createError({
-      statusCode: 401
+      statusCode: 401,
+      message: 'Token invalid'
     })
   }
 
@@ -31,8 +33,8 @@ export default async (event: H3Event<EventHandlerRequest>) => {
 
   if(exp <= now) {
     throw createError({
-      statusCode: 401
+      statusCode: 401,
+      message: 'Token expired'
     })
   }
-  
 };

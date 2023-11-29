@@ -33,8 +33,7 @@
       <Avatar 
         v-if="!!isAuthenticated" 
         :image=user?.avatarURL 
-        class="mr-2" 
-        size="large" 
+        class="mr-2"
         shape="circle" 
       />
       <Button 

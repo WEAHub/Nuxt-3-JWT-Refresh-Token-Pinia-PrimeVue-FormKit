@@ -5,11 +5,11 @@
  * - Verificar el token
  * - Generar tokens nuevos
  */
-import { User, JWToken, UserModel } from "~/types/User"
 import jwt from 'jsonwebtoken'
 import { HttpStatusCode } from "axios"
-import { getUserByEmail } from "~/server/models/user"
 import { Nullable } from "primevue/ts-helpers"
+import { JWToken, UserModel } from "types/User"
+import { getUserByEmail, getUserById } from "server/models/user"
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
@@ -23,10 +23,19 @@ export default defineEventHandler(async (event) => {
     })
   }
   
-  const user: Nullable<Partial<UserModel>> = {...await getUserByEmail(tokenVerified.email)}
-  delete user?.password;
+  const user: Nullable<UserModel> = await getUserById(tokenVerified.id)
 
-  const tokens = generateTokens(user)
+  if(!user) {
+    return createError({
+      statusCode: HttpStatusCode.BadRequest
+    })
+  }
+
+  const tokenData: Partial<UserModel> = { 
+    id: user.id
+  }
+
+  const tokens = generateTokens(tokenData)
   return {
     user,
     tokens

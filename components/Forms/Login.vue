@@ -64,7 +64,6 @@ function handleLoginError(error: FetchError): void {
           classes: {
             input: 'mt-4 p-button p-button-outlined p-component w-full block',
           },
-
         }"
         icon="pi pi-external-link"
         type="submit"

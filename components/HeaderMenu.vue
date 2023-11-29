@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import SidebarMenu from './SidebarMenu.vue';
+
   const visible = ref(false);
 
   const menu = useMenu()
@@ -7,19 +9,10 @@
   const auth = useAuth()
   const { isAuthenticated } = storeToRefs(auth)
 
-  function updateMenu() {
-    const menuItemsUpdate = menuItems.value.map((menuItem) => ({
-      ...menuItem,
-      visible: menuItem.adminOnly && !!isAuthenticated.value || !menuItem.adminOnly
-    }))
-
-    menu.setMenus(menuItemsUpdate)
-  }
-
-  watch([isAuthenticated], () => updateMenu())
+  watch([isAuthenticated], () => menu.updateMenu())
 
   onMounted(() => {
-    updateMenu()
+    menu.updateMenu()
   })
 </script>
 

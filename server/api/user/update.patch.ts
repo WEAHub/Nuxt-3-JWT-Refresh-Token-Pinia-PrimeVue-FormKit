@@ -1,8 +1,8 @@
+import { UserModel } from "~/types/User"
 import { Nullable } from "primevue/ts-helpers"
+import { APIMessage } from "~/types/APIMessage"
 import { updateUser } from "~/server/models/user"
 import protectRoute from "~/server/utils/protectRoute"
-import { APIMessage } from "~/types/APIMessage"
-import { UserModel } from "~/types/User"
 
 export default defineEventHandler(async (event) => {
   await protectRoute(event)
