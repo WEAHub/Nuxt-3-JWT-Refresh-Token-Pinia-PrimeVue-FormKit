@@ -26,6 +26,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  console.log(user)
   const verified = await verify(password, user?.password!)
 
   if (!verified) {
