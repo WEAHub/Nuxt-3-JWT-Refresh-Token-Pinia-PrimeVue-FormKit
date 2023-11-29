@@ -12,7 +12,8 @@ export interface UserModel extends User {
 }
 
 
-export interface JWToken extends Partial<JwtPayload>, User {
+export interface JWToken extends Partial<JwtPayload> {
+  id: string
   tokenType: string
 }
 

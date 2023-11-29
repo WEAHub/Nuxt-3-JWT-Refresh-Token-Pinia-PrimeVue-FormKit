@@ -5,7 +5,6 @@ export default function useDeleteUser() {
   const { isAuthenticated } = storeToRefs(useAuth())
   const users = useUsers()
 
-
   if (!isAuthenticated.value) {
     throw new Error('User is not authenticated')
   }

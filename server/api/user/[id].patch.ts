@@ -17,12 +17,10 @@ export default defineEventHandler(async (event) => {
   }
 
   const userPatchData = await readBody(event)
-  Object.assign(userPatchData, {
-    id: authUser.id
-  })
 
-  const user: Nullable<UserModel> = await updateUser(userPatchData)
-
+  const user: Nullable<UserModel> = Object.assign({}, await updateUser(userPatchData))
+  delete user.password
+  
   if(!user) {
     return createError({ 
       statusCode: 400,

@@ -5,7 +5,7 @@ const { user } = storeToRefs(auth)
 </script>
 
 <template>
-  <Card>
+  <Card class="user-details">
     <template #title>
       <div class="flex align-items-center gap-2">
         <i class="pi pi-user text-xl"></i>
@@ -13,7 +13,7 @@ const { user } = storeToRefs(auth)
       </div>
     </template>
     <template #content>
-      <div class="flex flex-column align-items-center text-center user-details">
+      <div class="flex flex-column align-items-center text-center">
         <Image 
           :src="user?.avatarURL" 
           alt="Avatar" 
@@ -35,6 +35,8 @@ const { user } = storeToRefs(auth)
 
 <style lang="scss" scoped>
 .user-details {
+
+  max-width: 25rem;
 
   &__description {
 

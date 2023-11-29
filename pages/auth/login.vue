@@ -5,7 +5,9 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="w-20rem p-5 surface-card border-round-lg">
-    <FormsLogin/>
+  <div class="flex justify-content-center">
+    <div class="surface-card p-5 border-round-md shadow-3">
+      <FormsLogin/>
+    </div>
   </div>
 </template>

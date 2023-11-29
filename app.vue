@@ -6,7 +6,7 @@
 
 <template>
   <NuxtLayout>
-    <div class="justify-content-center m-5">
+    <div class="m-5 flex-grow-1">
       <NuxtPage />
       <Toast />
     </div>

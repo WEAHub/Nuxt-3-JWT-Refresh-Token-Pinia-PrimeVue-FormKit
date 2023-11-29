@@ -14,29 +14,11 @@ export const useUsers = defineStore('users', {
       try {
         const { users } = await $fetchAPI<State>(
           '/user/list', 
-          { 
-            method: 'GET', 
-          }
+          { method: 'GET' }
         )
   
         this.setUsers(users)
   
-      } catch (error) {
-        throw error
-      }
-    },
-
-    async updateUser(user: UserModel) {
-      try {
-        const user = await $fetchAPI<UserModel>(
-          '/user/update', 
-          { 
-            method: 'PATCH', 
-          }
-        )
-        
-        this.setUser(user);
-
       } catch (error) {
         throw error
       }
@@ -48,7 +30,7 @@ export const useUsers = defineStore('users', {
     },
 
     setUser(user: UserModel) {
-      const userStored = this.users.find(user => user.id === user.id)
+      const userStored = this.users.find(_user => _user.id === user.id)
       if(!!userStored) {
         Object.assign(userStored, user);
       }
