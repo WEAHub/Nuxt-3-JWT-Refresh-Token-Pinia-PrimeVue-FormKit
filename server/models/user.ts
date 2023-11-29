@@ -23,3 +23,12 @@ export async function updateUser(user: UserModel): Promise<Nullable<UserModel>> 
   Object.assign(userFound, {...user})
   return userFound;
 }
+
+export async function deleteUser(userId: string): Promise<Boolean> {
+  const userIdx = users.findIndex(user => user.id === userId)
+  const userFound = userIdx > -1
+  if(userFound) {
+    users.splice(userIdx, 1);
+  }
+  return userFound
+}

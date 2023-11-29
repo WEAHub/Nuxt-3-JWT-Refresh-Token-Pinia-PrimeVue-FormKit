@@ -1,25 +1,10 @@
 <script lang="ts" setup>
-import { Component } from 'vue';
+import useDeleteUser from '~/composables/user/useDelete';
 
-  const users = useUsers()
-  const { users: userList } = storeToRefs(users);
-
-  function composeField(field: string, value: string): string {
-    const isAvatar = field === 'avatarURL'
-    const isActions = field === 'actions'
-    
-    if(isAvatar) {
-      return `<Image src="${value}" width="35"/>`
-    }
-
-    if(isActions) {
-      return `<Button icon="pi pi-user-edit" severity="secondary" rounded outlined aria-label="Edit" />`
-    }
-    
-    return `<span>${value}</span>`
-  }
-
-  onMounted(() => users.getUsers())
+const users = useUsers()
+const { users: userList } = storeToRefs(users);
+const deleteUser = useDeleteUser();
+onMounted(() => users.getUsers())
 
 </script>
 
@@ -52,9 +37,18 @@ import { Component } from 'vue';
         <Column header="Actions">
           <template #body="props">
             <Button icon="pi pi-user-edit" severity="secondary" text rounded aria-label="Edit" />
+            <Button 
+              text 
+              rounded 
+              icon="pi pi-trash" 
+              severity="danger" 
+              aria-label="Edit" 
+              @click="deleteUser({id: props.data.id})"
+            />
           </template>
         </Column>
       </DataTable>
     </template>
   </Card>
+  <ConfirmPopup></ConfirmPopup>
 </template>
