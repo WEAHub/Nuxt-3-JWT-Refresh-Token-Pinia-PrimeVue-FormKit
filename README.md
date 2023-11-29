@@ -1,75 +1,23 @@
-# Nuxt 3 Minimal Starter
+# Testing Nuxt 3 Project
+- Este proyecto no es más que una prueba para aprender a utilizar **Nuxt 3**.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+- El objetivo del proyecto es el desarrollo Full Stack de una aplicación web que requiera:
+  - Login/Logout.
+  - Formularios con validación mediante FormKit.
+  - Gestión de errores.
+  - Uso de tokens:
+    - Access token
+    - Refresh token
+  - Refresco de tokens cuando caducan de forma que no se note.
+  - Store persistente para mantener la sesión.
+  - Control de las paginas mediante middleware.
+  - CRUD de usuarios.
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Librerías usadas:
+  - Nuxt 3
+  - PrimeVue
+  - PrimeFlex
+  - FormKit
+  - Pinia
+  - JSON Web Token
+  - BCrypt
