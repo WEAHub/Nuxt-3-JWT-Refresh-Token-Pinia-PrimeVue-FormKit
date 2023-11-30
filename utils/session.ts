@@ -1,7 +1,12 @@
+import { Nullable } from "primevue/ts-helpers";
 import { JWToken } from "~/types/User";
 
-function getUserFromToken(): JWToken {
+function getUserFromToken(): Nullable<JWToken> {
   const auth = useAuth()
+  const { isAuthenticated } = auth;
+
+  if(!isAuthenticated) return null
+
   const accessToken = auth.tokens?.accessToken!;
   const parsedToken: string = parseToken(accessToken)
   const decodedToken: JWToken = decodeToken(parsedToken);
@@ -19,8 +24,13 @@ function decodeToken(JWToken: string): JWToken {
 }
 
 function tokenIsExpired(): boolean {
-  const { exp } = getUserFromToken();
+  const authToken = getUserFromToken();
+
+  if(!authToken) return false
+
+  const exp = authToken?.exp 
   const now = Math.floor(Date.now() / 1000)
+
   return (exp! <= now);
 }
 

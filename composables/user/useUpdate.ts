@@ -28,7 +28,7 @@ export default function useUpdateDetails() {
       users.setUser(data.payload);
 
       const userFromToken = getUserFromToken();
-      if(userFromToken.id === dto.id) {
+      if(userFromToken?.id === dto.id) {
         auth.setUser(data.payload)
       }
       resolve(data)
