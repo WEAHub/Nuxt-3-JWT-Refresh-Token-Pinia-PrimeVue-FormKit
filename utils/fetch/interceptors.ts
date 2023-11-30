@@ -13,7 +13,5 @@ export const onRequestInterceptors = defineInterceptors<'onRequest'>([
 ])
 
 export const onResponseInterceptors = defineInterceptors<'onResponse'>([])
-
 export const onRequestErrorInterceptors = defineInterceptors<'onRequestError'>([])
-
 export const onResponseErrorInterceptors = defineInterceptors<'onResponseError'>([])

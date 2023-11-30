@@ -23,12 +23,17 @@ const $fetchRefresh = configureRefreshFetch({
     if (!url) return false
 
     const { isAuthenticated } = useAuth()
-    const expiredToken = tokenIsExpired();
 
-    return !!isAuthenticated
-      && url.toString().startsWith('/api')
+    if(!isAuthenticated) return false
+
+    const expiredToken: boolean = tokenIsExpired();
+
+    const authRequestExpiredToken: boolean = 
+      url.toString().startsWith('/api')
       && !IGNORE_REFRESH_ROUTES.includes(url.toString())
       && expiredToken
+      
+    return authRequestExpiredToken
   },
 })
 

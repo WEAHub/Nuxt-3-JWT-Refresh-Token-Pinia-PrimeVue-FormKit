@@ -41,7 +41,7 @@ async function submitHandler(credentials: User, node: FormKitNode) {
 
 function handleLoginError(error: FetchError): void {
   const errorDetails: NuxtError = error.response?._data
-
+console.log(error);
   setErrors(
     'loginForm',
     [errorDetails.message!]
