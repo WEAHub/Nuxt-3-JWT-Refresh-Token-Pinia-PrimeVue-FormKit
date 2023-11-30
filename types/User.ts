@@ -1,10 +1,10 @@
 import { JwtPayload } from "jsonwebtoken"
 
 export interface User {
-  email: string
+  email?: string
   password?: string
-  name: string
-  avatarURL: string
+  name?: string
+  avatarURL?: string
 }
 
 export interface UserModel extends User {
@@ -12,7 +12,7 @@ export interface UserModel extends User {
 }
 
 
-export interface JWToken extends Partial<JwtPayload> {
+export interface JWToken extends Partial<JwtPayload>, User {
   id: string
   tokenType: string
 }

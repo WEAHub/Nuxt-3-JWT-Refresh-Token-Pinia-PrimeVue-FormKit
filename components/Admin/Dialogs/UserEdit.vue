@@ -96,42 +96,38 @@ watch([props], ([{user, visible}]) => {
 </script>
 
 <template>
-<Dialog 
-  modal 
-  v-model:visible="visibleRef"
-  @update:visible="onUpdateVisible"
-  :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
-  :header="'Edit user - ' + props?.user?.name" 
-  :close-on-escape="true"
-  class="edit-dialog"
->
-  <FormKit
-    id="editUserForm"
-    type="form"
-    :actions="false"
-    v-model="formData"
-    @submit="submitHandler"
-  > 
-    <FormKitSchema
-      :data="formData"
-      :schema="schema" 
-    />
-      <FormKit
-        :config="{
-          classes: {
-            input: 'mt-4 p-button p-button-outlined p-component w-full block',
-          },
-        }"
-        type="submit"
-        label="Save"
+  <Dialog 
+    modal 
+    v-model:visible="visibleRef"
+    @update:visible="onUpdateVisible"
+    :header="'Edit user - ' + props?.user?.name" 
+    :close-on-escape="true"
+    :style="{ 
+      width: '30rem',
+      maxWidth: '80vw'
+    }" 
+    >
+    <FormKit
+      id="editUserForm"
+      type="form"
+      :actions="false"
+      v-model="formData"
+      @submit="submitHandler"
+    > 
+      <FormKitSchema
+        :data="formData"
+        :schema="schema" 
       />
-  </FormKit>
-</Dialog>
+        <FormKit
+          :config="{
+            classes: {
+              input: 'mt-4 p-button p-button-outlined p-component w-full block',
+            },
+          }"
+          type="submit"
+          label="Save"
+        />
+    </FormKit>
+  </Dialog>
   
 </template>
-
-<style lang="scss" scoped>
-  .edit-dialog {
-    max-width: 50rem;
-  }
-</style>
