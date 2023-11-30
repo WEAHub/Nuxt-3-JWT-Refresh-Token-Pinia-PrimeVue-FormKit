@@ -4,14 +4,7 @@ export const IGNORE_REFRESH_ROUTES = [
   '/api/users/signup',
 ]
 
-export const onRequestInterceptors = defineInterceptors<'onRequest'>([
-  {
-    route: IGNORE_REFRESH_ROUTES,
-    negateRoute: true,
-    fn({ options }) { },
-  },
-])
-
+export const onRequestInterceptors = defineInterceptors<'onRequest'>([])
 export const onResponseInterceptors = defineInterceptors<'onResponse'>([])
 export const onRequestErrorInterceptors = defineInterceptors<'onRequestError'>([])
 export const onResponseErrorInterceptors = defineInterceptors<'onResponseError'>([])

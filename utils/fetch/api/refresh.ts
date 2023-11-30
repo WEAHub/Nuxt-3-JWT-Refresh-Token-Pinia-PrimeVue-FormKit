@@ -1,5 +1,3 @@
-import type { FetchError } from 'ofetch'
-
 type $Fetch = typeof globalThis.$fetch
 type $FetchParams = Parameters<$Fetch>
 type $FetchUrl = $FetchParams[0]
@@ -13,8 +11,11 @@ export interface Configuration {
 }
 
 export function configureRefreshFetch(config: Configuration): $Fetch {
+
   const { refreshToken, shouldRefreshToken, fetch } = config
+
   function wrappedFetch(url: $FetchUrl, options: $FetchOptions): $FetchReturnType {
+
     const expiredToken = shouldRefreshToken(url);
 
     if(expiredToken) {
@@ -25,7 +26,6 @@ export function configureRefreshFetch(config: Configuration): $Fetch {
       )
       .then(() => fetch(url, options))
       .catch(error => { throw error })
-
     }
 
     return fetch(url, options)
