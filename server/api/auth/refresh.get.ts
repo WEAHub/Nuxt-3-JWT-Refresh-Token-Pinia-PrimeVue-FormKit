@@ -8,13 +8,41 @@
 import jwt from 'jsonwebtoken'
 import { HttpStatusCode } from "axios"
 import { Nullable } from "primevue/ts-helpers"
-import { JWToken, UserModel } from "types/User"
+import { AuthResponse, JWToken, UserModel } from "types/User"
 import { getUserByEmail, getUserById } from "server/models/user"
 
 export default defineEventHandler(async (event) => {
+  
   const config = useRuntimeConfig()
-  const authHeader: string = event.headers.get('Authorization')!
-  const [ , refreshToken ] = authHeader.split(' ')
+  
+  const cookies: any = parseCookies(event);
+
+  const authCookie: Nullable<string> = cookies?.auth
+
+  if(!authCookie) {
+    return createError({
+      statusCode: HttpStatusCode.Unauthorized
+    })
+  };
+
+  const parsedAuth: Nullable<AuthResponse> = JSON.parse(authCookie);
+
+  const authTokens = parsedAuth?.tokens!;
+
+  if(!authTokens) {
+    return createError({
+      statusCode: HttpStatusCode.Unauthorized
+    })
+  };
+  
+  const { refreshToken } = authTokens
+
+  if(!refreshToken) {
+    return createError({
+      statusCode: HttpStatusCode.Unauthorized
+    })
+  };
+
   const tokenVerified: JWToken = <JWToken>jwt.verify(refreshToken, config.jwtSecret);
   
   if(!tokenVerified) {

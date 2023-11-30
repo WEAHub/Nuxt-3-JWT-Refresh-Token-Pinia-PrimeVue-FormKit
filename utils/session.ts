@@ -18,6 +18,13 @@ function decodeToken(JWToken: string): JWToken {
   return JSON.parse(base64Decoded)
 }
 
+function tokenIsExpired(): boolean {
+  const { exp } = getUserFromToken();
+  const now = Math.floor(Date.now() / 1000)
+  return (exp! <= now);
+}
+
 export {
   getUserFromToken,
+  tokenIsExpired
 }

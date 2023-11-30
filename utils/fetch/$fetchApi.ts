@@ -5,42 +5,30 @@ import { useAuth } from '~/stores/auth'
 import { configureRefreshFetch } from './api/refresh'
 import { AuthResponse } from '~/types/User'
 
-
 const $fetchRefresh = configureRefreshFetch({
   fetch: $fetch,
   refreshToken(fetch: any) {
-  /*     
-    const accessTokenExpiredEvent = useEventBus(AccessTokenExpiredEvent)
-    const tokensRefreshedEvent = useEventBus(TokensRefreshedEvent)
-    const refreshTokenExpiredEvent = useEventBus(RefreshTokenExpiredEvent)
-    accessTokenExpiredEvent.emit()
-  */
     const auth = useAuth()
-
-    return fetch('/api/auth/refresh', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${auth.tokens?.refreshToken}`,
-        'Access-Control-Allow-Origin': '*',
-      },
-    }).then((response: AuthResponse) => {
-      auth.setUser(response.user)
-      auth.setTokens(response.tokens)
-      // tokensRefreshedEvent.emit({ tokens: response })
-    }).catch((error: any) => {
-      auth.$reset()
-      //refreshTokenExpiredEvent.emit({ error: error.response._data })
-      throw error
-    })
+    return fetch('/api/auth/refresh')
+      .then((response: AuthResponse) => {
+        auth.setUser(response.user)
+        auth.setTokens(response.tokens)
+      })
+      .catch((error: any) => {
+        auth.logout()
+        throw error
+      })
   },
-  shouldRefreshToken(e) {
+  shouldRefreshToken(url) {
+    if (!url) return false
+
     const { isAuthenticated } = useAuth()
-    const request = e.request
-    if (!request) return false
-    return !!isAuthenticated // user is authenticated
-      && request.toString().startsWith('/api') // is API request
-      && !IGNORE_REFRESH_ROUTES.includes(request.toString()) // is not ignored route
-      && e.response?.status === 401 // is unauthorized
+    const expiredToken = tokenIsExpired();
+
+    return !!isAuthenticated
+      && url.toString().startsWith('/api')
+      && !IGNORE_REFRESH_ROUTES.includes(url.toString())
+      && expiredToken
   },
 })
 

@@ -44,6 +44,7 @@ onMounted(() => getUsers())
   <Card class="w-full">
     <template #content>
       <DataTable 
+      tableSt
         :value="userList ?? []"
         paginator 
         :rowsPerPageOptions="[5, 10, 20, 50]"

@@ -1,6 +1,5 @@
 import type { H3Event } from 'h3'
-import jwt, { JwtPayload } from 'jsonwebtoken'
-import { getUserById } from 'models/user';
+import jwt from 'jsonwebtoken'
 import { Nullable } from 'primevue/ts-helpers';
 import { JWToken, JWTokens, UserModel } from '~/types/User';
 
@@ -20,23 +19,6 @@ function getTokens(event: H3Event): JWTokens | undefined | null {
     refreshToken
   }
 }
-
-async function getUserFromSession(tokens: JWTokens) {
-  const config = useRuntimeConfig()
-  const tokenDecoded: JWToken = decryptToken(
-    tokens?.accessToken!, 
-    config.jwtSecret
-  );
-  return getUserById(tokenDecoded.userId) 
-}
-
-function checkTokenExpiration(token: string): boolean {
-  const { exp }: JwtPayload = <JwtPayload>jwt.decode(token);
-  const now = new Date().getTime();
-  const isExpired = exp! <= now
-  return isExpired;
-}
-
 
 function generateToken(buffer: object, secretKey: string, expiresIn: number): string {
   return jwt.sign(
@@ -84,7 +66,5 @@ export {
   generateToken,
   generateTokens,
   decryptToken,
-  getUserFromSession,
-  checkTokenExpiration,
   getTokens
 }
