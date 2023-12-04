@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { componentNames } from '#build/components';
+
 
 interface Library {
   image: string
@@ -76,7 +78,7 @@ function openLink(url: string): void {
         <div class="libraries__item col-12 xl:col-6" v-for="library in libraries">
           <div class="libraries__library-content" @click="openLink(library.link)">
             <div class="libraries__library-logo">
-              <NuxtImg height="80" fit="contain" :src="library.image" loading="lazy"></NuxtImg>
+              <img :src="'/img/' + library.image"/>
             </div>
             <div class="libraries__library-info gap-1">
               <span class="libraries__library-title">{{ library.title }}</span>

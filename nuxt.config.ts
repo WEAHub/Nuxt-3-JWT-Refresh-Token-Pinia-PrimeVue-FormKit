@@ -56,7 +56,6 @@ export default defineNuxtConfig({
   ],
 
   image: {
-    dir: 'assets/img',
     provider: process.env.VERCEL_ENV ? 'vercel' : 'ipx'
   },
 

@@ -8,7 +8,7 @@
         <span class="nuxt-info__message">The goal is to learn as much as possible with a simple project</span> 
         -->
       </div>
-      <NuxtImg class="nuxt-info__logo" src="logo_big.svg" />
+      <img class="nuxt-info__logo" src="~/assets/img/logo_big.svg" />
     </div>
 </template>
 
