@@ -1,20 +1,25 @@
+<script lang="ts" setup>
+
+
+</script>
+
 <template>
   
   <div class="home flex flex-column">
 
-    <div class="home__section home__section--info mt-5 sm:mt-0">
+    <div id="information" class="home__section home__section--info mt-5 sm:mt-0">
       <div class="home__section-content">  
         <HomeNuxtInformation/>
       </div>
     </div>
 
-    <div class="home__section">
+    <div id="objectives" class="home__section">
       <div class="home__section-content">  
         <HomeNuxtObjectives/>
       </div>
     </div>
     
-    <div class="home__section">
+    <div id="libraries" class="home__section">
       <div class="home__section-content">  
         <HomeLibrariesUsed/>
       </div>

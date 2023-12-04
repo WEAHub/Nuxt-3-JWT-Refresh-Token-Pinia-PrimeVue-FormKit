@@ -1,15 +1,15 @@
 <template>
-  <div class="nuxt-info justify-content-center xl:justify-content-between">
-    <div class="nuxt-info__welcome">
-      <span class="nuxt-info__title">Welcome to my</span>
-      <span class="nuxt-info__subtitle">Nuxt 3 Learning Project</span>
-      <span class="nuxt-info__message">Everything is learned by trying and failing.</span>
-      <!-- 
-      <span class="nuxt-info__message">The goal is to learn as much as possible with a simple project</span> 
-      -->
+    <div class="nuxt-info justify-content-center xl:justify-content-between" v-motion-pop-visible-once>
+      <div class="nuxt-info__welcome">
+        <span class="nuxt-info__title">Welcome to my</span>
+        <span class="nuxt-info__subtitle">Nuxt 3 Learning Project</span>
+        <span class="nuxt-info__message">Everything is learned by trying and failing.</span>
+        <!-- 
+        <span class="nuxt-info__message">The goal is to learn as much as possible with a simple project</span> 
+        -->
+      </div>
+      <NuxtImg class="nuxt-info__logo" src="logo_big.svg" />
     </div>
-    <NuxtImg class="nuxt-info__logo" src="logo_big.svg" />
-  </div>
 </template>
 
 <style lang="scss" scoped>

@@ -57,6 +57,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 
 <style lang="scss" scoped>
@@ -70,6 +71,6 @@
   }
 
   #logo {
-    width: 8rem;
+    width: 6rem;
   }
 </style>

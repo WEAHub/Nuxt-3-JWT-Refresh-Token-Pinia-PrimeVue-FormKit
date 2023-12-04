@@ -66,7 +66,7 @@ function openLink(url: string): void {
 </script>
 
 <template>
-  <div class="libraries justify-content-center xl:justify-content-between">
+  <div class="libraries justify-content-center xl:justify-content-between" v-motion-slide-visible-bottom  :delay="150">
     <div class="flex flex-column gap-5">
       <span class="text-blue-300 text-6xl font-semibold">
         Libraries  

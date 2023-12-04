@@ -10,6 +10,16 @@ export default defineNuxtConfig({
   
   typescript: { typeCheck: true },
 
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      title: 'Nuxt 3 Testing Project'
+    },
+    pageTransition: { name: 'page', mode: 'out-in' }
+
+  },
+
   imports: {
     dirs: [
       'stores/**',
@@ -23,6 +33,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
+    '@vueuse/motion/nuxt',
     '@formkit/nuxt',
     'nuxt-primevue',
   ],
@@ -61,7 +72,7 @@ export default defineNuxtConfig({
       ripple: true
     },
   },
-
+  
   pinia: {
     storesDirs: ['./stores/**'],
   },

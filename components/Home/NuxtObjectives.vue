@@ -14,8 +14,7 @@
 </script>
 
 <template>
-
-  <div class="objectives flex-column xl:flex-row justify-content-center xl:justify-content-between">
+  <div class="objectives flex-column xl:flex-row justify-content-center xl:justify-content-between" v-motion-slide-visible-bottom :delay="150">
     <NuxtImg class="objectives__image" src="goals.svg"></NuxtImg>
     <div class="flex flex-column gap-5">
       <span class="text-blue-300 text-6xl font-semibold">
