@@ -10,58 +10,63 @@
 </script>
 
 <template>
-  <div id="header" class="flex justify-content-between h-5rem p-2 pl-4 pr-4 surface-section">
-    
-    <div class="flex align-items-center gap-4">
-      <NuxtLink to="/" custom v-slot="{ navigate }">
-        <img 
-          class="cursor-pointer" 
-          id="logo" 
-          @click="navigate" 
-          src="~/assets/img/logo2.svg"
+  <div class="header surface-ground z-1 flex justify-content-center sticky top-0">
+    <div class="header__content flex justify-content-between align-items-center h-5rem surface-section pl-5 pr-5">
+      <div class="flex align-items-center gap-4">
+        <NuxtLink to="/" custom v-slot="{ navigate }">
+          <img 
+            class="cursor-pointer" 
+            id="logo" 
+            @click="navigate" 
+            src="~/assets/img/logo.svg"
+          />
+        </NuxtLink>
+        
+        <SidebarMenu/>
+
+        <HeaderMenu/>
+        
+      </div>
+
+      <div class="align-items-center gap-3 hidden md:flex">
+        <span class="pointer-events-none">{{ user?.name }}</span>
+        <Avatar 
+          v-if="!!isAuthenticated" 
+          :image=user?.avatarURL 
+          class="mr-2"
+          shape="circle" 
         />
-      </NuxtLink>
-      
-      <SidebarMenu/>
-
-      <HeaderMenu/>
-      
-    </div>
-
-    <div class="align-items-center gap-3 hidden md:flex">
-      <span class="pointer-events-none">{{ user?.name }}</span>
-      <Avatar 
-        v-if="!!isAuthenticated" 
-        :image=user?.avatarURL 
-        class="mr-2"
-        shape="circle" 
-      />
-      <Button 
-        icon="pi pi-times"
-        class="button p-button-outlined p-button-danger p-button-sm"
-        label="Logout"
-        v-if="!!isAuthenticated" 
-        @click="auth.logout()" 
-      ></Button>
-
-      <NuxtLink to="/auth/login">
         <Button 
-          icon="pi pi-user"
-          class="p-button-outlined"
-          label="Login"
-          v-if="!isAuthenticated && !inLoginPage" 
-        >
-        </Button>
-      </NuxtLink>
-      
+          icon="pi pi-times"
+          class="button p-button-outlined p-button-danger p-button-sm"
+          label="Logout"
+          v-if="!!isAuthenticated" 
+          @click="auth.logout()" 
+        ></Button>
+
+        <NuxtLink to="/auth/login">
+          <Button 
+            icon="pi pi-user"
+            class="p-button-outlined"
+            label="Login"
+            v-if="!isAuthenticated && !inLoginPage" 
+          >
+          </Button>
+        </NuxtLink>
+        
+      </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-  #header {
+<style lang="scss" scoped>
+  .header {
     border-bottom: 1px solid var(--surface-border);
-    align-items: center;
+
+    &__content {
+      max-width: 70rem;
+      width: 100%;
+    }
   }
 
   #logo {

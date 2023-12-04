@@ -1,12 +1,13 @@
 <script setup lang="ts">
   import { useAuth } from '~/stores/auth.js'
-  const menus = useMenu()
   const store = useAuth()
+  const menus = useMenu()
+  menus.updateMenu()
 </script>
 
 <template>
   <NuxtLayout>
-    <div class="m-5 flex-grow-1">
+    <div class="flex-grow-1">
       <NuxtPage />
       <Toast />
     </div>

@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/image": "^1.1.0",
+    "@nuxtjs/google-fonts": "^3.1.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@sfxcode/formkit-primevue": "^1.5.4",
     "nuxt": "^3.8.2",

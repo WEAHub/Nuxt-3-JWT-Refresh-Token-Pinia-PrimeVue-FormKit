@@ -19,6 +19,8 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@nuxtjs/google-fonts',
+    "@nuxt/image",
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@formkit/nuxt',
@@ -41,7 +43,18 @@ export default defineNuxtConfig({
     'primeicons/primeicons.css',
     'assets/style/main.scss',
   ],
-  
+
+  image: {
+    dir: 'assets/img',
+  },
+
+  googleFonts: {
+    preload: true,
+    families: {
+      Roboto: true,
+    }
+  },
+
   primevue: {
     options: {
       useFormkit: true,

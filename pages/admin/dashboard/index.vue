@@ -5,5 +5,7 @@ definePageMeta({
 </script>
 
 <template>
-  <AdminDashboardUserInformation/>
+  <div class="page-content">
+    <AdminDashboardUserInformation/>
+  </div>
 </template>

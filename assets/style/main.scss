@@ -1,3 +1,7 @@
+:root {
+  --nuxt-green: rgba(5, 255, 155);
+}
+
 body {
   margin: 0;
 }
@@ -31,4 +35,28 @@ body {
   .p-datatable .p-datatable-tbody > tr > td > .p-column-title {
     display: block;
   }
+}
+
+*::-webkit-scrollbar {
+  width: .6rem;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--surface-ground);
+  border-radius: 100px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--surface-card);
+  border-radius: 100px;
+}
+
+* {
+  font-family: 'Roboto'
+}
+
+.page-content {
+  max-width: 70rem;
+  padding: 3rem;
+  margin: 0 auto;
 }

@@ -7,7 +7,9 @@ definePageMeta({
 </script>
 
 <template>
-  <AdminUsersTable/>
+  <div class="page-content">
+    <AdminUsersTable/>
+  </div>
 </template>
 
 <style scoped>
